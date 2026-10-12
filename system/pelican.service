@@ -1,0 +1,19 @@
+[Unit]
+Description=Pelican Webserver
+After=network.target
+
+[Service]
+Type=simple
+User=apache
+Group=apache
+WorkingDirectory=/var/www/blog
+Environment=/var/www/blog/.venv/bin
+# Environment="/home/hunterm/http/pelican/.venv/bin"
+ExecStart=/usr/bin/bash  /var/www/blog/run.sh
+ExecReload=/usr/bin/make regenerate
+KillSignal=SIGQUIT
+TimeoutStartSec=0
+
+[Install]
+WantedBy=multi-user.target
+
