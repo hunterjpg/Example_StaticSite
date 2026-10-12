@@ -7,7 +7,7 @@ Type=simple
 User=apache
 Group=apache
 WorkingDirectory=/var/www/blog
-Environment=/var/www/blog/.venv/bin
+Environment="PATH=$PATH:/var/www/blog/.venv/bin"
 ExecStart=/usr/bin/bash /var/www/blog/system/run.sh
 ExecReload=/var/www/blog/.venv/bin/pelican content
 KillSignal=SIGQUIT
@@ -15,4 +15,3 @@ TimeoutStartSec=0
 
 [Install]
 WantedBy=multi-user.target
-

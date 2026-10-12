@@ -9,7 +9,7 @@ if [ $# -lt 1 ]; then
     exit 1
 fi
 
-s_SERVER_NAME=$1
+s_SERVER_ALIAS=$1
 s_PORT=${2:-80}
 s_BIND=${3:-*}
 
@@ -54,7 +54,7 @@ cat > /etc/httpd/sites-available/$s_SERVER_ALIAS.horseworld.ca.conf <<EOL
     CustomLog /var/log/httpd/$s_SERVER_ALIAS/requests.log combined
 </VirtualHost>
 EOL
-ln -s /etc/httpd/sites-available/blog.horseworld.ca.conf /etc/httpd/sites-enabled/blog.horseworld.ca.conf
+ln -s /etc/httpd/sites-available/$s_SERVER_ALIAS.horseworld.ca.conf /etc/httpd/sites-enabled/$s_SERVER_ALIAS.horseworld.ca.conf
 
 mkdir -p /var/log/httpd/$s_SERVER_ALIAS
 touch /var/log/httpd/$s_SERVER_ALIAS/error.log
@@ -74,7 +74,7 @@ if ! [[ -e /etc/systemd/system/pelican.service ]]; then
 fi
 
 # Environment
-if ! [[ -d "$(dirname "$0")/.venv" ]]; then
+if ! [[ -d .venv ]]; then
     python3.14 -m venv .venv
     source .venv/bin/activate
     python -m pip install --no-cache-dir -r requirements.txt
