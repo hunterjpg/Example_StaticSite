@@ -9,7 +9,7 @@ Group=apache
 WorkingDirectory=/var/www/blog
 Environment="PATH=$PATH:/var/www/blog/.venv/bin"
 ExecStart=/usr/bin/bash /var/www/blog/system/run.sh
-ExecReload=/var/www/blog/.venv/bin/pelican content
+ExecReload=/var/www/blog/.venv/bin/pelican content --ignore-cache
 KillSignal=SIGQUIT
 TimeoutStartSec=0
 

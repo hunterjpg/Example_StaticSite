@@ -52,6 +52,17 @@ cat > /etc/httpd/sites-available/$s_SERVER_ALIAS.horseworld.ca.conf <<EOL
     DocumentRoot /var/www/$s_SERVER_ALIAS/html
     ErrorLog /var/log/httpd/$s_SERVER_ALIAS/error.log
     CustomLog /var/log/httpd/$s_SERVER_ALIAS/requests.log combined
+
+    Alias "/theme" "/var/www/$s_SERVER_ALIAS/html/theme"
+    <Directory "/var/www/$s_SERVER_ALIAS/html/theme">
+        Require all granted
+    </Directory>
+
+    Alias "/theme" "/theme"
+    Alias "/static" "/static"
+    <Directory "/theme">
+        Require all granted
+    </Directory>
 </VirtualHost>
 EOL
 ln -s /etc/httpd/sites-available/$s_SERVER_ALIAS.horseworld.ca.conf /etc/httpd/sites-enabled/$s_SERVER_ALIAS.horseworld.ca.conf
